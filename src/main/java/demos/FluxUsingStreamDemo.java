@@ -20,12 +20,13 @@ public class FluxUsingStreamDemo {
         Flux<Employee> employeeFlux = Flux.fromStream(employeeList.stream())
                 .sort(Comparator.comparing(Employee::getAge))
                 .filter(e -> e.getSalary() > 2000)
-                .delayElements(Duration.ofSeconds(2));
+                        .doOnNext(e -> System.out.println("next"));
+                //.delayElements(Duration.ofSeconds(2));
 
 
         employeeFlux.subscribe(System.out::println);
 
-        Thread.sleep(5000);
+       // Thread.sleep(5000);
 
 
     }
